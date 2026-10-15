@@ -727,6 +727,66 @@ if (companySettingsForm) {
 }
 
 /* ==================== 8. FORM SUBMISSIONS & FILE UPLOADS ==================== */
+
+// Client-side image processor: compresses and resizes photos to lightweight data URLs
+function processImageFile(file, maxWidth = 800, maxHeight = 800, quality = 0.82) {
+  return new Promise((resolve, reject) => {
+    if (!file) return reject(new Error('No file selected'));
+    if (!file.type || !file.type.startsWith('image/')) {
+      return reject(new Error('Selected file is not an image (PNG, JPG, WebP allowed)'));
+    }
+    if (file.size > 25 * 1024 * 1024) {
+      return reject(new Error('File is too large (maximum 25MB allowed)'));
+    }
+
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('Failed to read image file'));
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onerror = () => reject(new Error('Failed to load image in browser'));
+      img.onload = () => {
+        try {
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth || height > maxHeight) {
+            if (width / height > maxWidth / maxHeight) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            } else {
+              width = Math.round((width * maxHeight) / height);
+              height = maxHeight;
+            }
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.max(1, width);
+          canvas.height = Math.max(1, height);
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return resolve(e.target.result);
+
+          // Handle PNG transparency cleanly by filling with a white background
+          if (file.type === 'image/png') {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, width, height);
+          }
+
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const compressed = canvas.toDataURL('image/jpeg', quality);
+          resolve(compressed);
+        } catch (canvasErr) {
+          resolve(e.target.result);
+        }
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 function setupForms() {
   // Modal Close buttons
   document.querySelectorAll('.admin-modal-close').forEach(btn => {
@@ -738,29 +798,66 @@ function setupForms() {
   // Project Image File Upload
   const projectFileInput = document.getElementById('project-file-input');
   if (projectFileInput) {
-    projectFileInput.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
+    const handleProjectUpload = async (file) => {
       if (!file) return;
-
-      const formData = new FormData();
-      formData.append('file', file);
-
       try {
-        showToast('Uploading image...', 'info');
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await res.json();
-        if (data.success && data.url) {
-          document.getElementById('project-image-url').value = data.url;
-          document.getElementById('project-preview-img').src = data.url;
-          showToast('Image uploaded successfully!', 'success');
+        showToast('Processing project image...', 'info');
+        const compressedDataUrl = await processImageFile(file, 1000, 650, 0.80);
+
+        // Update preview and input value immediately
+        document.getElementById('project-image-url').value = compressedDataUrl;
+        document.getElementById('project-preview-img').src = compressedDataUrl;
+
+        // Try local backend upload if running locally
+        try {
+          const formData = new FormData();
+          formData.append('file', file);
+          const res = await fetch('/api/upload', { method: 'POST', body: formData });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.success && data.url) {
+              document.getElementById('project-image-url').value = data.url;
+              document.getElementById('project-preview-img').src = data.url;
+            }
+          }
+        } catch (_) {
+          // On Netlify or offline, compressedDataUrl is already active and will save to Firebase
         }
+
+        showToast('Project image uploaded & ready!', 'success');
       } catch (err) {
-        showToast('Failed to upload image file', 'error');
+        console.error('Project image upload error:', err);
+        showToast(err.message || 'Failed to upload project image', 'error');
       }
+    };
+
+    projectFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      handleProjectUpload(file);
     });
+
+    // Drag-and-drop support for project dropzone
+    const projectDropzone = projectFileInput.closest('.upload-dropzone');
+    if (projectDropzone) {
+      ['dragenter', 'dragover'].forEach(name => {
+        projectDropzone.addEventListener(name, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          projectDropzone.style.borderColor = 'var(--spark-orange)';
+        });
+      });
+      ['dragleave', 'drop'].forEach(name => {
+        projectDropzone.addEventListener(name, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          projectDropzone.style.borderColor = '';
+        });
+      });
+      projectDropzone.addEventListener('drop', (e) => {
+        const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        if (file) handleProjectUpload(file);
+      });
+    }
   }
 
   // Project Form Submit (Create or Update)
@@ -828,29 +925,67 @@ function setupForms() {
   // Team Avatar File Upload
   const teamFileInput = document.getElementById('team-file-input');
   if (teamFileInput) {
-    teamFileInput.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
+    const handleAvatarUpload = async (file) => {
       if (!file) return;
-
-      const formData = new FormData();
-      formData.append('file', file);
-
       try {
-        showToast('Uploading avatar...', 'info');
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await res.json();
-        if (data.success && data.url) {
-          document.getElementById('team-avatar-url').value = data.url;
-          document.getElementById('team-preview-avatar').src = data.url;
-          showToast('Avatar uploaded successfully!', 'success');
+        showToast('Processing profile photo...', 'info');
+        // Optimize avatar: 480x480 max dimension, high quality, ~30KB
+        const compressedDataUrl = await processImageFile(file, 480, 480, 0.82);
+
+        // Update preview and input value immediately
+        document.getElementById('team-avatar-url').value = compressedDataUrl;
+        document.getElementById('team-preview-avatar').src = compressedDataUrl;
+
+        // Try local backend upload if running locally
+        try {
+          const formData = new FormData();
+          formData.append('file', file);
+          const res = await fetch('/api/upload', { method: 'POST', body: formData });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.success && data.url) {
+              document.getElementById('team-avatar-url').value = data.url;
+              document.getElementById('team-preview-avatar').src = data.url;
+            }
+          }
+        } catch (_) {
+          // On Netlify or offline, compressedDataUrl is already active and will save to Firebase
         }
+
+        showToast('Profile photo ready to save!', 'success');
       } catch (err) {
-        showToast('Failed to upload avatar', 'error');
+        console.error('Avatar upload error:', err);
+        showToast(err.message || 'Failed to upload avatar', 'error');
       }
+    };
+
+    teamFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      handleAvatarUpload(file);
     });
+
+    // Drag-and-drop support for team dropzone
+    const teamDropzone = teamFileInput.closest('.upload-dropzone');
+    if (teamDropzone) {
+      ['dragenter', 'dragover'].forEach(name => {
+        teamDropzone.addEventListener(name, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          teamDropzone.style.borderColor = 'var(--spark-orange)';
+        });
+      });
+      ['dragleave', 'drop'].forEach(name => {
+        teamDropzone.addEventListener(name, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          teamDropzone.style.borderColor = '';
+        });
+      });
+      teamDropzone.addEventListener('drop', (e) => {
+        const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        if (file) handleAvatarUpload(file);
+      });
+    }
   }
 
   // Team Form Submit (Create or Update)
