@@ -111,26 +111,6 @@
   ],
   "team": [
     {
-      "id": "user-1",
-      "name": "LOGESH",
-      "role": "Designer",
-      "department": "Design & Innovation",
-      "email": "logesh@gmail.com",
-      "phone": "+91 63808 10194",
-      "bio": "Visionary entrepreneur and technology strategist with 12+ years driving digital innovation and scaling global software teams.",
-      "skills": [
-        "Strategic Vision",
-        "Enterprise Architecture",
-        "Product Strategy",
-        "Team Scaling"
-      ],
-      "avatar": "/uploads/sparklyn-1792037602205-347106044.jpeg",
-      "linkedin": "",
-      "github": "",
-      "joinedDate": "2022-01-10",
-      "updatedAt": "2026-10-15T04:13:23.947Z"
-    },
-    {
       "id": "user-1791963095423",
       "name": "AYYAKKON G",
       "role": "DevOps",
@@ -202,6 +182,43 @@
       "avatar": "/uploads/sparklyn-1792037332689-398783620.jpeg",
       "linkedin": "https://www.linkedin.com/in/gurunathapandi-t-bb8248322?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       "github": "https://github.com/gurunathapandi-Green-Heart",
+      "joinedDate": "2026-10-15"
+    },
+    {
+      "id": "user-1792037904231",
+      "name": "DEEPAK KUMAR K",
+      "role": "Designer",
+      "department": "Design & Innovation",
+      "email": "kdeepakk671@gmail.com",
+      "phone": "+917418576472",
+      "bio": "I am a B.Sc. Computer Science student with basic knowledge of C, C++, and MS Office. I am interested in learning new technologies, improving my technical skills, and gaining practical experience. I am a hardworking and motivated person who aims to build a successful career in the IT field.",
+      "skills": [
+        "Goal Setting",
+        "Multitasking",
+        "Resource Management"
+      ],
+      "avatar": "/uploads/sparklyn-1792037806548-546452368.jpeg",
+      "linkedin": "https://www.linkedin.com/in/k-deepak-kumar-b21aab443?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+      "github": "https://github.com",
+      "joinedDate": "2026-10-15"
+    },
+    {
+      "id": "user-1792038673501",
+      "name": "LOGESH K",
+      "role": "Tester",
+      "department": "Quality Assurance",
+      "email": "logesh43216@gmail.com",
+      "phone": "6380810194",
+      "bio": "I am a B.Sc. Computer Science student with basic knowledge of C, C++, and MS Office. I am interested in learning new technologies, improving my technical skills, and gaining practical experience. I am a hardworking and motivated person who aims to build a successful career in the IT field.",
+      "skills": [
+        "Strategic Vision",
+        "Enterprise Architecture",
+        "Product Strategy",
+        "Team Scaling"
+      ],
+      "avatar": "/uploads/sparklyn-1792038671684-299416974.jpeg",
+      "linkedin": "https://linkedin.com",
+      "github": "https://github.com",
       "joinedDate": "2026-10-15"
     }
   ],

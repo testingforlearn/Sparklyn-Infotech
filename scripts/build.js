@@ -20,4 +20,24 @@ if (fs.existsSync(rootData)) {
   console.warn('⚠️ Warning: data/db.json not found in root.');
 }
 
+// Ensure public/uploads directory exists and copy uploaded assets
+const rootUploads = path.join(__dirname, '..', 'uploads');
+const publicUploads = path.join(__dirname, '..', 'public', 'uploads');
+
+if (!fs.existsSync(publicUploads)) {
+  fs.mkdirSync(publicUploads, { recursive: true });
+}
+
+if (fs.existsSync(rootUploads)) {
+  const files = fs.readdirSync(rootUploads);
+  for (const file of files) {
+    const src = path.join(rootUploads, file);
+    const dest = path.join(publicUploads, file);
+    if (fs.statSync(src).isFile()) {
+      fs.copyFileSync(src, dest);
+    }
+  }
+  console.log(`✅ Synced ${files.length} uploaded image(s) to public/uploads/`);
+}
+
 console.log('🎉 Build completed successfully! Public directory is ready for Netlify.');
