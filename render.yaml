@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: sparklyn-infotech
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: ./public
+    routes:
+      - type: rewrite
+        source: /admin
+        destination: /admin.html
+      - type: rewrite
+        source: /company-profile
+        destination: /company-profile.html
+      - type: rewrite
+        source: /profile
+        destination: /company-profile.html
+      - type: rewrite
+        source: /api/projects
+        destination: /data/db.json
+      - type: rewrite
+        source: /api/company
+        destination: /data/db.json
+      - type: rewrite
+        source: /api/team
+        destination: /data/db.json
+      - type: rewrite
+        source: /api/stats
+        destination: /data/db.json
