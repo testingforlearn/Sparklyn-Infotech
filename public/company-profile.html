@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sparklyn Infotech - Company Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --primary: #ff5500;
+      --primary-dark: #d84300;
+      --primary-light: #fff3ed;
+      --secondary: #0f172a;
+      --secondary-light: #1e293b;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --bg-light: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text-main);
+      background-color: #cbd5e1;
+      line-height: 1.55;
+      font-size: 13.5px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Floating Toolbar */
+    .toolbar {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      z-index: 1000;
+      display: flex;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 10px 16px;
+      border-radius: 40px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    .toolbar-btn {
+      background: linear-gradient(135deg, #ff6b00, #ff4500);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .toolbar-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 85, 0, 0.4);
+    }
+
+    .toolbar-btn.secondary {
+      background: #334155;
+    }
+
+    .toolbar-btn.secondary:hover {
+      background: #475569;
+    }
+
+    /* Document Container & A4 Pages */
+    .document-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 0;
+      gap: 30px;
+    }
+
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      height: 297mm;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      page-break-after: always;
+      padding: 22mm 20mm 20mm 20mm;
+    }
+
+    /* Page Header */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-logo {
+      height: 26px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-brand-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.8px;
+      color: var(--secondary);
+      text-transform: uppercase;
+    }
+
+    .header-brand-text span {
+      color: var(--primary);
+    }
+
+    .header-tagline {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .header-category {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    /* Page Footer */
+    .page-footer {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .footer-left {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--secondary);
+      text-transform: uppercase;
+    }
+
+    .footer-center {
+      color: var(--text-muted);
+    }
+
+    .footer-right {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Typography & Sections */
+    h2.section-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h2.section-heading::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 15px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    p.body-text {
+      color: #334155;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+
+    /* Lists */
+    ul.bullet-list {
+      list-style: none;
+      margin-bottom: 12px;
+    }
+
+    ul.bullet-list li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 5px;
+      font-size: 11.5px;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    ul.bullet-list li::before {
+      content: '•';
+      position: absolute;
+      left: 3px;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 14px;
+      top: -1px;
+    }
+
+    /* Service Grid */
+    .services-compact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 8px;
+      margin-bottom: 10px;
+    }
+
+    .service-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 3px solid var(--primary);
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+
+    .service-box-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .service-box-title i {
+      color: var(--primary);
+      font-size: 11px;
+    }
+
+    .service-box p {
+      font-size: 10.5px;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    /* Expertise Tags */
+    .expertise-group {
+      margin-bottom: 8px;
+      font-size: 11.5px;
+    }
+
+    .expertise-group strong {
+      color: var(--secondary);
+      font-weight: 700;
+      display: inline-block;
+      width: 175px;
+    }
+
+    .expertise-group span {
+      color: #334155;
+    }
+
+    /* ==================== PAGE 1: COVER PAGE ==================== */
+    .cover-page {
+      padding: 0;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .cover-top-banner {
+      position: relative;
+      padding: 40px 45px 30px 45px;
+      background: linear-gradient(135deg, #0b0f19 0%, #172033 60%, #1e293b 100%);
+      color: #ffffff;
+      overflow: hidden;
+      border-bottom: 4px solid var(--primary);
+    }
+
+    .cover-circuit-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 320px;
+      height: 100%;
+      opacity: 0.15;
+      background-image: radial-gradient(#ff6b00 1px, transparent 1px), radial-gradient(#ff6b00 1px, transparent 1px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+    }
+
+    .cover-brand-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cover-logo-img {
+      height: 60px;
+      width: auto;
+      background: #ffffff;
+      padding: 6px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .cover-brand-names h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #ffffff;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .cover-brand-names h1 span {
+      color: #ff7700;
+    }
+
+    .cover-brand-names p {
+      font-size: 13px;
+      color: #94a3b8;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+    }
+
+    .cover-mid-content {
+      padding: 35px 45px 20px 45px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cover-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(255, 85, 0, 0.2);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .cover-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1.08;
+      color: var(--secondary);
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .cover-title span {
+      color: var(--primary);
+    }
+
+    .cover-subtitle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #475569;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .cover-info-motto-row {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 25px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+
+    .cover-contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .cover-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #334155;
+    }
+
+    .cover-contact-item i {
+      width: 24px;
+      height: 24px;
+      background: #e2e8f0;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .cover-motto-box {
+      border-left: 3px solid var(--primary);
+      padding-left: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cover-motto-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--secondary);
+      line-height: 1.25;
+    }
+
+    .cover-motto-title span {
+      color: var(--primary);
+    }
+
+    .cover-motto-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .cover-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .cover-pillar-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 12px 6px;
+      border-radius: 6px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .cover-pillar-card i {
+      font-size: 18px;
+      color: var(--primary);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .cover-pillar-card span {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--secondary);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .cover-image-strip {
+      height: 120px;
+      width: 100%;
+      background: url('https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      position: relative;
+    }
+
+    .cover-image-strip::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.4) 100%);
+    }
+
+    .cover-bottom-bar {
+      background: #0b0f19;
+      color: #94a3b8;
+      text-align: center;
+      padding: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-top: 1px solid #1e293b;
+    }
+
+    /* ==================== PROJECT CARDS (PAGE 4 & 5) ==================== */
+    .project-entry {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      position: relative;
+      page-break-inside: avoid;
+    }
+
+    .project-entry::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #ff5500, #ff8800);
+      border-radius: 6px 0 0 6px;
+    }
+
+    .project-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 5px;
+    }
+
+    .project-num-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--secondary);
+      line-height: 1.3;
+    }
+
+    .project-type-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 3px 8px;
+      border-radius: 3px;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    .project-overview-text {
+      font-size: 11.5px;
+      color: #334155;
+      line-height: 1.5;
+      margin-bottom: 7px;
+      text-align: justify;
+    }
+
+    .project-features-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .project-features-list {
+      list-style: none;
+      margin-bottom: 7px;
+    }
+
+    .project-features-list li {
+      position: relative;
+      padding-left: 14px;
+      font-size: 11px;
+      color: #334155;
+      line-height: 1.45;
+      margin-bottom: 3px;
+    }
+
+    .project-features-list li::before {
+      content: '✔';
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-size: 10px;
+      top: 1px;
+    }
+
+    .project-tech-row {
+      background: #f8fafc;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      color: #475569;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .project-tech-row strong {
+      color: var(--secondary);
+    }
+
+    /* Approach Workflow Grid */
+    .approach-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+
+    .step-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 10px 8px;
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      width: 22px;
+      height: 22px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 6px auto;
+    }
+
+    .step-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
+      font-size: 9.5px;
+      color: #64748b;
+      line-height: 1.35;
+    }
+
+    /* Callout Box */
+    .closing-contact-card {
+      background: linear-gradient(135deg, #0b0f19 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 18px 22px;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+      margin-top: 14px;
+    }
+
+    .closing-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    .closing-title span {
+      color: var(--primary);
+    }
+
+    .closing-tagline {
+      font-size: 11.5px;
+      color: #94a3b8;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .closing-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    .closing-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .closing-detail-item i {
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    /* Print Specific Styles */
+    @media print {
+      body {
+        background: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .toolbar {
+        display: none !important;
+      }
+
+      .document-container {
+        padding: 0 !important;
+        gap: 0 !important;
+      }
+
+      .a4-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Toolbar for Viewing / Printing -->
+  <div class="toolbar">
+    <button class="toolbar-btn" onclick="window.print()">
+      <i class="fas fa-print"></i> Print / Save as PDF
+    </button>
+    <a href="/" class="toolbar-btn secondary">
+      <i class="fas fa-arrow-left"></i> Back to Website
+    </a>
+  </div>
+
+  <div class="document-container">
+
+    <!-- ==========================================
+         PAGE 1: COVER PAGE
+         ========================================== -->
+    <div class="a4-page cover-page">
+      <div class="cover-top-banner">
+        <div class="cover-circuit-overlay"></div>
+        <div class="cover-brand-header">
+          <img src="/assets/logo.png" alt="Sparklyn Logo" class="cover-logo-img">
+          <div class="cover-brand-names">
+            <h1>Sparklyn <span>Infotech</span></h1>
+            <p>From First Spark to Future Tech</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-mid-content">
+        <div class="cover-badge-pill">
+          <i class="fas fa-award"></i> Professional Technology Solutions
+        </div>
+        <h1 class="cover-title">Company<br><span>Profile</span></h1>
+        <div class="cover-subtitle">Software Development &amp; Digital Solutions</div>
+
+        <div class="cover-info-motto-row">
+          <div class="cover-contact-list">
+            <div class="cover-contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Phase 2, OMR IT Expressway, Chennai, Tamil Nadu, India</span>
+            </div>
+            <div class="cover-contact-item">
+              <i class="fas fa-phone-alt"></i>
+              <span>+91 98765 43210</span>
+            </div>
+            <div class="cover-contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>contact@sparklyninfotech.com</span>
+            </div>
+            <div class="cover-contact-item">
+              <i class="fas fa-globe"></i>
+              <span>www.sparklyninfotech.com</span>
+            </div>
+          </div>
+          <div class="cover-motto-box">
+            <div class="cover-motto-title">Igniting Ideas.<br><span>Engineering Solutions.</span></div>
+            <div class="cover-motto-desc">Transforming bold concepts into resilient enterprise software and intuitive mobile applications.</div>
+          </div>
+        </div>
+
+        <div class="cover-pillars-grid">
+          <div class="cover-pillar-card">
+            <i class="fas fa-code"></i>
+            <span>Web Apps</span>
+          </div>
+          <div class="cover-pillar-card">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Mobile Apps</span>
+          </div>
+          <div class="cover-pillar-card">
+            <i class="fas fa-cogs"></i>
+            <span>Custom Software</span>
+          </div>
+          <div class="cover-pillar-card">
+            <i class="fas fa-brain"></i>
+            <span>AI Solutions</span>
+          </div>
+          <div class="cover-pillar-card">
+            <i class="fas fa-palette"></i>
+            <span>UI/UX Design</span>
+          </div>
+          <div class="cover-pillar-card">
+            <i class="fas fa-cloud"></i>
+            <span>Cloud &amp; DevOps</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-image-strip"></div>
+      <div class="cover-bottom-bar">
+        IDEAS &nbsp;|&nbsp; CODE &nbsp;|&nbsp; INNOVATION
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         PAGE 2: ABOUT, VISION, MISSION & SERVICES
+         ========================================== -->
+    <div class="a4-page">
+      <div class="page-header">
+        <div class="header-brand">
+          <img src="/assets/logo.png" alt="Sparklyn" class="header-logo">
+          <div>
+            <div class="header-brand-text">Sparklyn <span>Infotech</span></div>
+            <div class="header-tagline">From First Spark to Future Tech</div>
+          </div>
+        </div>
+        <div class="header-category">Company Overview</div>
+      </div>
+
+      <!-- Section 1: About Our Company -->
+      <h2 class="section-heading">1. About Our Company</h2>
+      <p class="body-text">
+        <strong>Sparklyn Infotech</strong> is a dynamic technology engineering and digital transformation venture committed to turning groundbreaking ideas into high-performance web applications, assistive mobile solutions, and enterprise software systems. Founded with a vision to ignite digital progress, we partner with startups, educational academies, retail enterprises, and commercial organizations across India and globally.
+      </p>
+      <p class="body-text">
+        We specialize in analyzing real-world operational challenges and developing robust, secure, and user-friendly digital products that streamline business processes, eliminate communication barriers, and drive tangible commercial growth. Combining agile engineering methodologies with creative craftsmanship, we build scalable digital infrastructure tailored to each client's unique operational needs.
+      </p>
+
+      <!-- Section 2: Our Vision -->
+      <h2 class="section-heading">2. Our Vision</h2>
+      <p class="body-text">
+        To become a globally recognized benchmark in software engineering and digital transformation, empowering enterprises, aspiring students, and everyday individuals through human-centric, reliable, and accessible technological products.
+      </p>
+
+      <!-- Section 3: Our Mission -->
+      <h2 class="section-heading">3. Our Mission</h2>
+      <ul class="bullet-list">
+        <li>Engineer high-performance, responsive web applications and cross-platform mobile apps.</li>
+        <li>Build impactful assistive technologies that solve critical everyday societal challenges.</li>
+        <li>Empower businesses with seamless inventory control, point-of-sale systems, and automated accounting workflows.</li>
+        <li>Deliver real-time competitive examination and assessment portals to accelerate educational aspirants' success.</li>
+        <li>Maintain an uncompromising commitment to clean architecture, code quality, data security, and long-term client support.</li>
+      </ul>
+
+      <!-- Section 4: Our Services -->
+      <h2 class="section-heading">4. Our Services</h2>
+      <div class="services-compact-grid">
+        <div class="service-box">
+          <div class="service-box-title"><i class="fas fa-laptop-code"></i> Web Application Development</div>
+          <p>Custom, scalable web platforms, full-stack portals, client dashboards, and responsive business websites crafted with modern React and Node.js ecosystems.</p>
+        </div>
+        <div class="service-box">
+          <div class="service-box-title"><i class="fas fa-mobile-screen"></i> Mobile Application Development</div>
+          <p>Cross-platform iOS and Android apps powered by Flutter, featuring fluid UI interactions, offline data synchronization, and camera-based computer vision.</p>
+        </div>
+        <div class="service-box">
+          <div class="service-box-title"><i class="fas fa-boxes-stacked"></i> Inventory &amp; ERP Systems</div>
+          <p>End-to-end stock control, automated invoicing, POS billing, supplier ledger records, and real-time financial tracking for retail and distributors.</p>
+        </div>
+        <div class="service-box">
+          <div class="service-box-title"><i class="fas fa-graduation-cap"></i> Online Examination &amp; EdTech Platforms</div>
+          <p>Real-time mock test engines, computer-based exam simulators, automated scorecard evaluations, and performance analytics for coaching institutes.</p>
+        </div>
+        <div class="service-box">
+          <div class="service-box-title"><i class="fas fa-robot"></i> AI &amp; Assistive Intelligence</div>
+          <p>Real-time gesture recognition, speech-to-sign visual animations, optical character recognition, and machine learning models for everyday accessibility.</p>
+        </div>
+        <div class="service-box">
+          <div class="service-box-title"><i class="fas fa-pen-nib"></i> UI/UX Design &amp; Maintenance</div>
+          <p>Intuitive user interface wireframing, high-fidelity Figma prototypes, performance optimization, cloud deployment, and 24/7 technical support.</p>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">SPARKLYN INFOTECH</div>
+        <div class="footer-center">Software Development &amp; Digital Solutions</div>
+        <div class="footer-right">Page 2</div>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         PAGE 3: EXPERTISE, TARGETS, GOALS & COMMITMENT
+         ========================================== -->
+    <div class="a4-page">
+      <div class="page-header">
+        <div class="header-brand">
+          <img src="/assets/logo.png" alt="Sparklyn" class="header-logo">
+          <div>
+            <div class="header-brand-text">Sparklyn <span>Infotech</span></div>
+            <div class="header-tagline">From First Spark to Future Tech</div>
+          </div>
+        </div>
+        <div class="header-category">Technical Profile</div>
+      </div>
+
+      <!-- Section 5: Technical Expertise -->
+      <h2 class="section-heading">5. Our Technical Expertise</h2>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px 14px; border-radius: 6px; margin-bottom: 14px;">
+        <div class="expertise-group">
+          <strong>Frontend Technologies:</strong>
+          <span>React.js, Next.js, HTML5, CSS3, TailwindCSS, Bootstrap, JavaScript (ES6+), TypeScript</span>
+        </div>
+        <div class="expertise-group">
+          <strong>Backend &amp; APIs:</strong>
+          <span>Node.js, Express.js, Python, FastAPI, RESTful API Architecture, WebSockets</span>
+        </div>
+        <div class="expertise-group">
+          <strong>Mobile Development:</strong>
+          <span>Flutter, Dart, Android Native, iOS Cross-Platform, Camera &amp; Hardware Sensor Integration</span>
+        </div>
+        <div class="expertise-group">
+          <strong>AI &amp; Computer Vision:</strong>
+          <span>TensorFlow Lite, MediaPipe, OpenCV, Speech-to-Text Recognition, Gesture Analysis</span>
+        </div>
+        <div class="expertise-group">
+          <strong>Databases &amp; Storage:</strong>
+          <span>PostgreSQL, MongoDB, MySQL, Firebase Firestore / Realtime DB, Redis</span>
+        </div>
+        <div class="expertise-group">
+          <strong>Cloud &amp; DevOps:</strong>
+          <span>Docker, AWS (EC2/S3), DigitalOcean, Git, GitHub Actions, NGINX, CI/CD Pipelines</span>
+        </div>
+        <div class="expertise-group">
+          <strong>Design &amp; Testing:</strong>
+          <span>Figma, Postman, Jest, Cypress, Responsive Design, OWASP Security Best Practices</span>
+        </div>
+      </div>
+
+      <!-- Section 6: Target Customers -->
+      <h2 class="section-heading">6. Our Target Customers &amp; Sectors</h2>
+      <p class="body-text">
+        We serve a diverse ecosystem of clients looking for dependable, cost-efficient, and cutting-edge software solutions:
+      </p>
+      <ul class="bullet-list">
+        <li><strong>Small &amp; Growing Businesses:</strong> Retailers, wholesalers, and service providers requiring streamlined inventory, invoicing, and POS accounting applications.</li>
+        <li><strong>Educational Institutes &amp; Academies:</strong> Coaching centers, government exam preparation institutes, and colleges needing secure mock test and assessment portals.</li>
+        <li><strong>Startups &amp; Product Innovators:</strong> Early-stage founders seeking agile development of Minimum Viable Products (MVPs), assistive applications, and customer-facing mobile apps.</li>
+        <li><strong>Healthcare &amp; Social Initiatives:</strong> Organizations building accessibility aids and assistive communication platforms for hearing-impaired communities.</li>
+        <li><strong>Independent Professionals &amp; SMEs:</strong> Businesses seeking professional digital brand presence and custom workflow automation.</li>
+      </ul>
+
+      <!-- Section 7: Future Goals -->
+      <h2 class="section-heading">7. Our Future Goals</h2>
+      <p class="body-text">
+        Our strategic roadmap focuses on establishing Sparklyn Infotech as an industry-standard technology partner by:
+      </p>
+      <ul class="bullet-list">
+        <li>Expanding our proprietary SaaS portfolio in inventory management and online assessment technology.</li>
+        <li>Advancing research and deployment of on-device AI for accessible communication tools (including regional sign languages).</li>
+        <li>Building long-term collaborative partnerships with enterprise businesses and educational bodies across India and overseas.</li>
+        <li>Continually investing in state-of-the-art cloud architectures and emerging engineering practices.</li>
+      </ul>
+
+      <!-- Section 8: Our Commitment -->
+      <h2 class="section-heading">8. Our Commitment</h2>
+      <p class="body-text">
+        We are firmly committed to client satisfaction, technical excellence, and transparent communication. Every software solution we craft undergoes rigorous quality benchmarking, security reviews, and usability testing. We guarantee timely project delivery, well-documented codebases, and ongoing technical support that empowers your business to operate without disruption.
+      </p>
+
+      <div class="page-footer">
+        <div class="footer-left">SPARKLYN INFOTECH</div>
+        <div class="footer-center">Software Development &amp; Digital Solutions</div>
+        <div class="footer-right">Page 3</div>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         PAGE 4: PROJECT PORTFOLIO (PROJECTS 1 & 2)
+         ========================================== -->
+    <div class="a4-page">
+      <div class="page-header">
+        <div class="header-brand">
+          <img src="/assets/logo.png" alt="Sparklyn" class="header-logo">
+          <div>
+            <div class="header-brand-text">Sparklyn <span>Infotech</span></div>
+            <div class="header-tagline">From First Spark to Future Tech</div>
+          </div>
+        </div>
+        <div class="header-category">Project Portfolio</div>
+      </div>
+
+      <h2 class="section-heading" style="margin-top: 0;">Our Project Portfolio</h2>
+      <p class="body-text" style="margin-bottom: 12px;">
+        Sparklyn Infotech has engineered purposeful software applications spanning assistive mobile AI, enterprise retail management, and online educational test platforms. Below are highlights of our flagship projects:
+      </p>
+
+      <!-- PROJECT 01: SIGNOVA -->
+      <div class="project-entry">
+        <div class="project-header-row">
+          <div class="project-num-title">PROJECT 01: SIGNOVA – SMART SIGN LANGUAGE ASSISTANT MOBILE APP</div>
+          <span class="project-type-badge">Mobile App &amp; Assistive AI</span>
+        </div>
+        <p class="project-overview-text">
+          <strong>Overview:</strong> Signova is an innovative, assistive mobile application specially developed for individuals who do not know sign language. It empowers non-signers to seamlessly communicate and bridge conversations with the deaf and hard-of-hearing community in classrooms, workplaces, healthcare clinics, and daily public interactions.
+        </p>
+        <div class="project-features-title">Key Capabilities &amp; Features:</div>
+        <ul class="project-features-list">
+          <li><strong>Two-Way Speech-to-Sign Translation:</strong> Captures spoken speech or typed text and converts it into animated sign language demonstrations in real time.</li>
+          <li><strong>Real-Time AI Camera Gesture Recognition:</strong> Utilizes mobile computer vision to identify sign language gestures captured by the device camera and translates them into readable text and synthesized speech.</li>
+          <li><strong>Interactive Learning &amp; Dictionary Module:</strong> Comprehensive categorized dictionary with step-by-step visual tutorials for users to practice and master basic to advanced sign vocabulary.</li>
+          <li><strong>Emergency Quick Phrases &amp; Offline Mode:</strong> Pre-loaded essential emergency phrases for instant accessibility without requiring continuous internet connectivity.</li>
+        </ul>
+        <div class="project-tech-row">
+          <strong>Technologies &amp; Architecture:</strong> Flutter, Dart, TensorFlow Lite, Computer Vision, Python, Firebase Cloud Services.
+        </div>
+      </div>
+
+      <!-- PROJECT 02: INVENTORY, SALES & ACCOUNTING SYSTEM -->
+      <div class="project-entry">
+        <div class="project-header-row">
+          <div class="project-num-title">PROJECT 02: INVENTORY, SALES &amp; ACCOUNTING MANAGEMENT SYSTEM</div>
+          <span class="project-type-badge">Full-Stack Web Application</span>
+        </div>
+        <p class="project-overview-text">
+          <strong>Overview:</strong> Developed a comprehensive web-based application to manage inventory, product stock, sales transactions, and accounting operations efficiently. Implemented modern features to streamline business workflows, maintain organized records, and simplify sales and inventory tracking for commercial retail and wholesale businesses.
+        </p>
+        <div class="project-features-title">Key Capabilities &amp; Features:</div>
+        <ul class="project-features-list">
+          <li><strong>Real-Time Stock &amp; Inventory Management:</strong> Tracks stock movements across multi-product catalogs, monitors minimum threshold levels, and provides automatic low-stock notifications.</li>
+          <li><strong>Fast Point-of-Sale (POS) &amp; Billing:</strong> Generates instant GST-compliant tax invoices, receipts, and order confirmations with integrated barcode lookup and payment tracking.</li>
+          <li><strong>Automated Double-Entry Accounting &amp; Ledgers:</strong> Automates customer and vendor ledger accounts, tracks outstanding payables and receivables, and generates real-time cash flow summaries.</li>
+          <li><strong>Financial Reporting &amp; Revenue Analytics:</strong> Interactive dashboard visualizations displaying daily, monthly, and yearly sales graphs, top-selling products, and gross/net profit-and-loss margins.</li>
+        </ul>
+        <div class="project-tech-row">
+          <strong>Technologies &amp; Architecture:</strong> React.js, Node.js, Express.js, PostgreSQL Database, TailwindCSS, Chart.js Data Visualization.
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">SPARKLYN INFOTECH</div>
+        <div class="footer-center">Software Development &amp; Digital Solutions</div>
+        <div class="footer-right">Page 4</div>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         PAGE 5: PROJECT 3, APPROACH & CLOSING
+         ========================================== -->
+    <div class="a4-page">
+      <div class="page-header">
+        <div class="header-brand">
+          <img src="/assets/logo.png" alt="Sparklyn" class="header-logo">
+          <div>
+            <div class="header-brand-text">Sparklyn <span>Infotech</span></div>
+            <div class="header-tagline">From First Spark to Future Tech</div>
+          </div>
+        </div>
+        <div class="header-category">Project Portfolio &amp; Engagement</div>
+      </div>
+
+      <!-- PROJECT 03: GOVEXAM TEST PORTAL -->
+      <div class="project-entry" style="margin-top: 0;">
+        <div class="project-header-row">
+          <div class="project-num-title">PROJECT 03: GOVEXAM TEST PORTAL – ONLINE EXAMINATION PLATFORM</div>
+          <span class="project-type-badge">EdTech Web Application</span>
+        </div>
+        <p class="project-overview-text">
+          <strong>Overview:</strong> A full-featured online exam testing website built specifically for government exam preparation aspirants (such as TNPSC, UPSC, SSC, Banking, and RRB). Designed to enable candidates to easily attend timed tests and view their score instantly in an authentic real-exam testing environment.
+        </p>
+        <div class="project-features-title">Key Capabilities &amp; Features:</div>
+        <ul class="project-features-list">
+          <li><strong>Authentic Computer-Based Test (CBT) Interface:</strong> Simulates official government exam UI with subject section switching, countdown timers, and full-screen distraction-free mode.</li>
+          <li><strong>Interactive Question Palette:</strong> Live status indicators for answered, unanswered, marked for review, and visited questions for optimal time management.</li>
+          <li><strong>Instant Automated Scorecard &amp; Analytics:</strong> Immediate calculation of total marks, negative mark deductions, accuracy rate, percentile standing, and time spent per question upon submission.</li>
+          <li><strong>Question-by-Question Solution Keys:</strong> In-depth explanatory answer keys and reference notes to help candidates identify weaknesses and improve test performance.</li>
+        </ul>
+        <div class="project-tech-row">
+          <strong>Technologies &amp; Architecture:</strong> React.js, Node.js, Express.js, MongoDB Database, RESTful APIs, TailwindCSS.
+        </div>
+      </div>
+
+      <!-- Section: Development Approach -->
+      <h2 class="section-heading" style="margin-top: 10px;">Our Project Development Approach</h2>
+      <p class="body-text" style="margin-bottom: 6px;">
+        Every digital solution delivered by Sparklyn Infotech follows an industry-tested, agile lifecycle to guarantee reliability, security, and exceptional user experience:
+      </p>
+
+      <div class="approach-steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-title">Discovery</div>
+          <div class="step-desc">Requirement scoping, target audience analysis, and architectural roadmap planning.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-title">UI/UX Design</div>
+          <div class="step-desc">Wireframing, user journey mapping, and interactive high-fidelity prototypes.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-title">Agile Build</div>
+          <div class="step-desc">Modular frontend &amp; backend coding with clean code standards and version control.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-title">QA &amp; Testing</div>
+          <div class="step-desc">Functional, cross-browser, responsive, and stress testing across devices.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">5</div>
+          <div class="step-title">Deployment</div>
+          <div class="step-desc">Cloud release, domain configuration, staff training, and 24/7 maintenance.</div>
+        </div>
+      </div>
+
+      <!-- Section: Why Choose Us -->
+      <h2 class="section-heading" style="margin-top: 8px;">Why Choose Sparklyn Infotech?</h2>
+      <ul class="bullet-list" style="margin-bottom: 8px;">
+        <li><strong>Tailored Solutions:</strong> No cookie-cutter templates; every application is engineered around your specific business workflow.</li>
+        <li><strong>Modern Tech Stacks:</strong> We build using modern, battle-tested frameworks ensuring high performance and longevity.</li>
+        <li><strong>Transparent Execution:</strong> Direct communication, frequent sprint updates, and dedicated post-launch support.</li>
+      </ul>
+
+      <!-- Closing Callout Box -->
+      <div class="closing-contact-card">
+        <div class="closing-title">SPARKLYN <span>INFOTECH</span></div>
+        <div class="closing-tagline">"From First Spark to Future Tech"</div>
+        <div class="closing-details-grid">
+          <div class="closing-detail-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Sparklyn Tech Park, Phase 2, OMR IT Expressway, Chennai, Tamil Nadu - 600096</span>
+          </div>
+          <div class="closing-detail-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="closing-detail-item">
+            <i class="fas fa-envelope"></i>
+            <span>contact@sparklyninfotech.com</span>
+          </div>
+          <div class="closing-detail-item">
+            <i class="fas fa-globe"></i>
+            <span>www.sparklyninfotech.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <div class="footer-left">SPARKLYN INFOTECH</div>
+        <div class="footer-center">Software Development &amp; Digital Solutions</div>
+        <div class="footer-right">Page 5</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

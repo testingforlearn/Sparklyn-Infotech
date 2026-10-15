@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sparklyn Infotech | From First Spark to Future Tech</title>
+  <meta name="description" content="Sparklyn Infotech - Premier enterprise software development, modern web and mobile apps, AI automation, and cloud architecture.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- ==================== NAVIGATION BAR ==================== -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="brand-logo">
+        <img src="/assets/logo.png" alt="Sparklyn Infotech Logo">
+        <div class="brand-text">
+          <span class="name">Sparklyn</span>
+          <span class="tagline">Infotech</span>
+        </div>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="/company-profile.html" target="_blank" style="color: #ff9900;"><i class="fas fa-file-pdf"></i> Profile</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/company-profile.html" target="_blank" class="btn btn-outline" style="padding: 8px 14px; font-size: 13px; border-color: rgba(255, 140, 0, 0.4);">
+          <i class="fas fa-file-pdf" style="color: var(--spark-orange);"></i>
+          <span>PDF Profile</span>
+        </a>
+        <a href="/admin" class="btn btn-admin">
+          <i class="fas fa-user-shield"></i>
+          <span>Admin Portal</span>
+        </a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero-section" id="home">
+    <canvas id="spark-canvas"></canvas>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-fire-alt" style="color: #ff5500;"></i>
+          <span>Igniting Next-Gen Digital Innovations</span>
+        </div>
+
+        <h1 class="hero-title">
+          From First Spark to <br>
+          <span class="gradient-text">Future Tech</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          At <strong class="company-name" style="color:#fff;">Sparklyn Infotech</strong>, we architect high-performance web applications, intelligent mobile experiences, and scalable enterprise cloud solutions that propel businesses into tomorrow.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            <span>Explore Our Projects</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            <span>Start a Project</span>
+            <i class="fas fa-paper-plane"></i>
+          </a>
+          <a href="/admin" class="btn btn-outline" style="border-color: rgba(255, 140, 0, 0.4);">
+            <i class="fas fa-lock" style="color:var(--spark-amber);"></i>
+            <span>Admin Control</span>
+          </a>
+        </div>
+
+        <!-- Key Metrics Ribbon -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number" id="stat-projects">150+</span>
+            <span class="stat-label">Projects Delivered</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="stat-clients">85+</span>
+            <span class="stat-label">Global Clients</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="stat-experts">40+</span>
+            <span class="stat-label">Tech Specialists</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="stat-satisfaction">99.2%</span>
+            <span class="stat-label">Client Satisfaction</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT US SECTION ==================== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-tag"><i class="fas fa-bullseye"></i> About Sparklyn Infotech</span>
+        <h2 class="section-title">Architecting Digital Excellence & Scalability</h2>
+        <p class="section-subtitle">We bridge the divide between ambitious ideas and bulletproof technical execution.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="about-card-banner">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" alt="Sparklyn Engineering Team">
+          </div>
+          <div class="about-float-card">
+            <div class="icon">
+              <i class="fas fa-award"></i>
+            </div>
+            <div>
+              <h4 style="font-size: 1.15rem; color:#fff;">ISO Certified Standards</h4>
+              <p style="font-size: 0.85rem; color:var(--text-secondary); margin:0;">Enterprise-Grade Security & Agility</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <h3>Transforming Bold Visions into Market-Leading Digital Platforms</h3>
+          <p id="company-about-text">
+            Founded with a passion to redefine technology consulting, Sparklyn Infotech is a premier software development powerhouse. We partner with fast-growing startups and established enterprises across industries to design, develop, and deploy cutting-edge digital experiences.
+          </p>
+          <p>
+            Our core DNA blends creative instinct with engineering rigor — ensuring your applications are blazingly fast, highly secure, and built to scale effortlessly with your customer base.
+          </p>
+
+          <div class="values-grid">
+            <div class="value-item">
+              <h4><span><i class="fas fa-eye"></i></span> Our Vision</h4>
+              <p id="company-vision-text">To be the global benchmark in technological innovation, empowering enterprises to lead through transformative digital engineering.</p>
+            </div>
+            <div class="value-item">
+              <h4><span><i class="fas fa-rocket"></i></span> Our Mission</h4>
+              <p id="company-mission-text">To craft resilient, scalable software solutions by combining creative mastery, cutting-edge technology, and unmatched client focus.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICES SECTION ==================== -->
+  <section class="section" id="services" style="background: rgba(18, 22, 30, 0.4);">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-tag"><i class="fas fa-cogs"></i> What We Do</span>
+        <h2 class="section-title">Full-Lifecycle Engineering Services</h2>
+        <p class="section-subtitle">From responsive frontend interfaces to distributed microservices, we build software that drives real business value.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card glass-panel">
+          <div class="service-icon-box">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3>Enterprise Web Applications</h3>
+          <p>Bespoke web apps engineered with modern reactive frameworks (React, Next.js, Node.js) featuring sub-second load times and high scalability.</p>
+          <div class="service-tags">
+            <span>React.js</span>
+            <span>Next.js</span>
+            <span>TypeScript</span>
+            <span>Node.js</span>
+          </div>
+        </div>
+
+        <div class="service-card glass-panel">
+          <div class="service-icon-box">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3>Mobile App Development</h3>
+          <p>Native & cross-platform iOS and Android apps with fluid 120 FPS animations, offline syncing, real-time push, and bank-grade security.</p>
+          <div class="service-tags">
+            <span>Flutter</span>
+            <span>React Native</span>
+            <span>Swift</span>
+            <span>Kotlin</span>
+          </div>
+        </div>
+
+        <div class="service-card glass-panel">
+          <div class="service-icon-box">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>AI & Machine Learning</h3>
+          <p>Intelligent automation, predictive algorithms, NLP workflows, and LLM agent integrations that supercharge business decision-making.</p>
+          <div class="service-tags">
+            <span>Python</span>
+            <span>FastAPI</span>
+            <span>TensorFlow</span>
+            <span>LLMs</span>
+          </div>
+        </div>
+
+        <div class="service-card glass-panel">
+          <div class="service-icon-box">
+            <i class="fas fa-cloud"></i>
+          </div>
+          <h3>Cloud & DevOps Architecture</h3>
+          <p>Zero-downtime multi-cloud infrastructure, CI/CD automated deployment pipelines, Kubernetes container orchestration, and serverless scaling.</p>
+          <div class="service-tags">
+            <span>AWS</span>
+            <span>Docker</span>
+            <span>Kubernetes</span>
+            <span>Terraform</span>
+          </div>
+        </div>
+
+        <div class="service-card glass-panel">
+          <div class="service-icon-box">
+            <i class="fas fa-pencil-ruler"></i>
+          </div>
+          <h3>UI/UX & Product Design</h3>
+          <p>Human-centered user experience design, wireframing, high-fidelity prototypes, and cohesive enterprise design systems that convert.</p>
+          <div class="service-tags">
+            <span>Figma</span>
+            <span>Design Systems</span>
+            <span>Prototypes</span>
+            <span>Usability</span>
+          </div>
+        </div>
+
+        <div class="service-card glass-panel">
+          <div class="service-icon-box">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Cybersecurity & QA</h3>
+          <p>Automated regression testing, load benchmarking, vulnerability scanning, and compliance auditing to safeguard your data assets.</p>
+          <div class="service-tags">
+            <span>Penetration Testing</span>
+            <span>OWASP</span>
+            <span>CI Tests</span>
+            <span>Audits</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PORTFOLIO / PROJECTS SECTION ==================== -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="projects-header">
+        <span class="section-tag"><i class="fas fa-layer-group"></i> Our Portfolio</span>
+        <h2 class="section-title">Engineered to Perform & Inspire</h2>
+        <p class="section-subtitle">Explore a selection of cutting-edge solutions built by our engineers. All managed live via our Admin Portal.</p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="All">All Projects</button>
+        <button class="filter-btn" data-filter="Web">Web Applications</button>
+        <button class="filter-btn" data-filter="Mobile">Mobile Apps</button>
+        <button class="filter-btn" data-filter="AI">AI & Cloud</button>
+      </div>
+
+      <!-- Dynamic Projects Grid -->
+      <div class="projects-grid" id="projects-grid">
+        <!-- Rendered dynamically by main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TEAM / USERS SECTION ==================== -->
+  <section class="section" id="team" style="background: rgba(18, 22, 30, 0.4);">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-tag"><i class="fas fa-users"></i> The Innovators</span>
+        <h2 class="section-title">Meet the Minds Powering Sparklyn</h2>
+        <p class="section-subtitle">Our interdisciplinary team of engineers, architects, and product strategists dedicated to your digital growth.</p>
+      </div>
+
+      <!-- Dynamic Team Grid -->
+      <div class="team-grid" id="team-grid">
+        <!-- Rendered dynamically by main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT SECTION ==================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-tag"><i class="fas fa-envelope-open-text"></i> Let's Connect</span>
+        <h2 class="section-title">Have a Project in Mind? Let's Ignite It.</h2>
+        <p class="section-subtitle">Drop us a line with your project requirements. Our engineering consultants will get back within 24 hours.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact Details -->
+        <div class="contact-info-card glass-panel">
+          <h3 style="font-size: 1.6rem; margin-bottom: 20px;">Contact Information</h3>
+          <p style="color:var(--text-secondary); margin-bottom: 30px;">
+            Whether you want to build a brand new product or modernize existing architecture, we are ready to assist.
+          </p>
+
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-info-text">
+              <h4>Headquarters</h4>
+              <p class="company-address">Sparklyn Tech Park, Phase 2, OMR IT Expressway, Chennai, Tamil Nadu - 600096</p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-info-text">
+              <h4>Email Us</h4>
+              <a href="mailto:contact@sparklyninfotech.com" class="company-email">contact@sparklyninfotech.com</a>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-info-text">
+              <h4>Call Us</h4>
+              <a href="tel:+919876543210" class="company-phone">+91 98765 43210</a>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-info-text">
+              <h4>Working Hours</h4>
+              <p>Monday – Saturday: 9:00 AM – 7:00 PM IST</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-card glass-panel">
+          <h3 style="font-size: 1.6rem; margin-bottom: 8px;">Send Us a Message</h3>
+          <p style="color:var(--text-secondary); margin-bottom: 24px; font-size: 0.95rem;">
+            Submissions are instantly delivered to our admin dashboard for direct review.
+          </p>
+
+          <form id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="contact-name">Your Full Name *</label>
+                <input type="text" id="contact-name" class="form-control" placeholder="e.g. John Doe" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-email">Email Address *</label>
+                <input type="email" id="contact-email" class="form-control" placeholder="john@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="contact-phone">Phone / WhatsApp</label>
+                <input type="text" id="contact-phone" class="form-control" placeholder="+91 98765 00000">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-service">Service Interested In</label>
+                <select id="contact-service" class="form-control">
+                  <option value="Enterprise Web Applications">Enterprise Web Applications</option>
+                  <option value="Mobile App Development">Mobile App Development</option>
+                  <option value="AI & Machine Learning">AI & Machine Learning</option>
+                  <option value="Cloud & DevOps">Cloud & DevOps</option>
+                  <option value="UI/UX Product Design">UI/UX Product Design</option>
+                  <option value="Cybersecurity & QA">Cybersecurity & QA</option>
+                  <option value="Other Technology Consulting">Other Technology Consulting</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-budget">Estimated Budget</label>
+              <select id="contact-budget" class="form-control">
+                <option value="Under $5,000">Under $5,000</option>
+                <option value="$5,000 - $15,000" selected>$5,000 - $15,000</option>
+                <option value="$15,000 - $30,000">$15,000 - $30,000</option>
+                <option value="$30,000+">$30,000+</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-message">Project Details & Objectives *</label>
+              <textarea id="contact-message" class="form-control" placeholder="Tell us about your project requirements, timeline, and goals..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">
+              <i class="fas fa-paper-plane"></i>
+              <span>Send Project Inquiry</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <img src="/assets/logo.png" alt="Sparklyn Infotech Logo">
+            <div class="brand-text">
+              <span class="name">Sparklyn</span>
+              <span class="tagline">Infotech</span>
+            </div>
+          </div>
+          <p>
+            Sparklyn Infotech is an agile software development company empowering businesses with next-generation digital applications, high-performance web systems, and intelligent AI solutions.
+          </p>
+          <div style="display:flex; gap:12px;">
+            <a href="https://linkedin.com" target="_blank" class="team-social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com" target="_blank" class="team-social-link"><i class="fab fa-github"></i></a>
+            <a href="https://twitter.com" target="_blank" class="team-social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" target="_blank" class="team-social-link"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Our Services</a></li>
+            <li><a href="#projects">Portfolio</a></li>
+            <li><a href="#team">Leadership & Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="#services">Web Applications</a></li>
+            <li><a href="#services">Mobile Apps</a></li>
+            <li><a href="#services">Cloud & DevOps</a></li>
+            <li><a href="#services">AI & Automation</a></li>
+            <li><a href="#services">UI/UX Design</a></li>
+            <li><a href="#services">Cybersecurity</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Portal Access</h4>
+          <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:16px;">
+            Authorized company administrators can manage projects, team members, inquiries, and company profile.
+          </p>
+          <a href="/admin" class="btn btn-admin" style="display:inline-flex;">
+            <i class="fas fa-lock"></i>
+            <span>Open Admin Dashboard</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 <strong class="company-name">Sparklyn Infotech</strong>. All rights reserved. "From First Spark to Future Tech".</p>
+        <p>Built with Passion & Cutting-Edge Web Standards.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FLOATING ADMIN BUTTON ==================== -->
+  <a href="/admin" class="floating-admin-btn" title="Open Admin Portal">
+    <i class="fas fa-shield-alt" style="color:var(--spark-amber);"></i>
+    <span>Admin Portal</span>
+  </a>
+
+  <!-- ==================== PROJECT DETAILS MODAL ==================== -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+      <div id="modal-project-details" style="padding: 30px;">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/main.js"></script>
+</body>
+</html>

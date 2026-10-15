@@ -1,0 +1,177 @@
+{
+  "company": {
+    "name": "Sparklyn Infotech",
+    "tagline": "From First Spark to Future Tech",
+    "shortBio": "A next-generation software development and digital transformation partner turning groundbreaking ideas into high-performance web, mobile, and AI solutions.",
+    "about": "Founded with a mission to ignite digital transformation, Sparklyn Infotech delivers end-to-end IT engineering, custom cloud software, mobile applications, and intelligent AI automation for businesses across the globe. From conceptual sparks to enterprise-scale deployment, our expert engineers and designers craft tailored digital products that drive exponential growth.",
+    "vision": "To be the global benchmark in technological innovation, empowering enterprises and startups to lead their industries through transformative digital engineering.",
+    "mission": "To craft resilient, scalable, and human-centric software solutions by combining creative mastery, cutting-edge engineering, and a relentless commitment to client success.",
+    "email": "contact@sparklyninfotech.com",
+    "phone": "+91 98765 43210",
+    "address": "Sparklyn Tech Park, Phase 2, OMR IT Expressway, Chennai, Tamil Nadu - 600096",
+    "stats": {
+      "projects": "150+",
+      "clients": "85+",
+      "experts": "40+",
+      "satisfaction": "99.2%"
+    },
+    "social": {
+      "linkedin": "https://linkedin.com/company/sparklyn-infotech",
+      "twitter": "https://twitter.com/sparklyntech",
+      "github": "https://github.com/sparklyn-infotech",
+      "instagram": "https://instagram.com/sparklyninfotech"
+    }
+  },
+  "admin": {
+    "email": "admin@sparklyn.com",
+    "password": "sparklyn@2026",
+    "name": "Sparklyn SuperAdmin"
+  },
+  "projects": [
+    {
+      "id": "proj-1792036002030",
+      "title": "AI-Based Automated Answer Sheet Evaluation System (EvalAI)",
+      "category": "Web Applications",
+      "client": "Sparklyn Client",
+      "summary": "EvalAI is an AI-powered web application that evaluates handwritten answer sheets using Tesseract OCR and Gemini AI, generating marks, feedback, and performance reports automatically.",
+      "description": "EvalAI is an AI-powered web application that evaluates handwritten answer sheets using Tesseract OCR and Gemini AI, generating marks, feedback, and performance reports automatically.",
+      "techStack": [
+        "Custom Tech"
+      ],
+      "image": "/uploads/sparklyn-1792035990533-404250928.jpeg",
+      "liveUrl": "",
+      "featured": true,
+      "status": "Completed",
+      "createdAt": "2026-10-15",
+      "updatedAt": "2026-10-15T03:47:01.651Z"
+    },
+    {
+      "id": "proj-1",
+      "title": "Signova - Smart Sign Language Assistant Mobile App",
+      "category": "Mobile App & AI",
+      "client": "Signova Accessibility Initiative",
+      "summary": "An intelligent assistive mobile application developed for people who do not know sign language, enabling seamless two-way communication with the deaf and hard-of-hearing community.",
+      "description": "Signova is an innovative mobile application specially built for individuals who do not know sign language. It breaks communication barriers by translating spoken language and everyday text into clear visual sign language animations, and recognizing sign language hand gestures in real time using AI-powered camera vision. Featuring interactive sign tutorials, quick-phrase dictionaries, and an intuitive offline-first interface, Signova bridges the gap between sign language users and non-signers in schools, workplaces, healthcare centers, and everyday life.",
+      "techStack": [
+        "Flutter",
+        "TensorFlow Lite",
+        "Computer Vision",
+        "Python",
+        "Firebase",
+        "Dart"
+      ],
+      "image": "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=1200&q=80",
+      "liveUrl": "https://signova.sparklyn.demo",
+      "featured": true,
+      "status": "Completed",
+      "createdAt": "2026-09-10"
+    },
+    {
+      "id": "proj-2",
+      "title": "Inventory, Sales & Accounting Management System",
+      "category": "Web Applications",
+      "client": "Enterprise Retail & Supply Chain",
+      "summary": "Developed a web-based application to manage inventory, product stock, sales transactions, and accounting operations efficiently. Implemented features to streamline business workflows, maintain organized records, and simplify sales and inventory tracking.",
+      "description": "Developed a web-based application to manage inventory, product stock, sales transactions, and accounting operations efficiently. Implemented features to streamline business workflows, maintain organized records, and simplify sales and inventory tracking with real-time stock alerts, automated invoice generation, point-of-sale (POS) billing, supplier/customer ledgers, and comprehensive profit & loss analytics.",
+      "techStack": [
+        "React",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "TailwindCSS",
+        "Chart.js"
+      ],
+      "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
+      "liveUrl": "https://inventory-accounting.sparklyn.demo",
+      "featured": true,
+      "status": "Completed",
+      "createdAt": "2026-08-22"
+    },
+    {
+      "id": "proj-3",
+      "title": "GovExam Test Portal - Online Examination & Mock Test Platform",
+      "category": "Web Applications",
+      "client": "Government Competitive Exam Aspirants",
+      "summary": "An interactive online exam test website for government exam preparation aspirants to easily attend timed tests and view their score instantly like a real exam.",
+      "description": "Designed and developed an end-to-end online examination platform tailored for government competitive exam preparation aspirants. The system delivers an authentic computer-based testing (CBT) environment with countdown timers, question palettes, section switching, and negative marking rules. Aspirants can easily attend mock tests and instantly view their comprehensive scorecard, percentile rank, time-per-question analysis, and detailed question-by-question explanations immediately upon submission.",
+      "techStack": [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "REST APIs",
+        "TailwindCSS"
+      ],
+      "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",
+      "liveUrl": "https://govexam-prep.sparklyn.demo",
+      "featured": true,
+      "status": "Completed",
+      "createdAt": "2026-07-15"
+    }
+  ],
+  "team": [
+    {
+      "id": "user-1",
+      "name": "Logesh",
+      "role": "Designer",
+      "department": "Design & Innovation",
+      "email": "logesh@gmail.com",
+      "phone": "+91 63808 10194",
+      "bio": "Visionary entrepreneur and technology strategist with 12+ years driving digital innovation and scaling global software teams.",
+      "skills": [
+        "Strategic Vision",
+        "Enterprise Architecture",
+        "Product Strategy",
+        "Team Scaling"
+      ],
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+      "linkedin": "",
+      "github": "",
+      "joinedDate": "2022-01-10",
+      "updatedAt": "2026-10-15T00:42:20.274Z"
+    },
+    {
+      "id": "user-1791963095423",
+      "name": "AYYAKKON G",
+      "role": "DevOps",
+      "department": "DevOps & Infrastructure",
+      "email": "iyyakone4372@gmail.com",
+      "phone": "+919042850490",
+      "bio": "M.Sc. Computer Science (2nd Year) student and Software Developer with practical industry experience at ecrio. Currently working in DevOps, with experience in software development, containerization, Kubernetes, CI/CD pipelines, deployment automation, and system monitoring. Strong interest in developing reliable software solutions and automating infrastructure and deployment processes.",
+      "skills": [
+        "Technical Skills",
+        "Leadership",
+        "Time Management",
+        "Quick Learning"
+      ],
+      "avatar": "/uploads/sparklyn-1791962966704-651494164.jpeg",
+      "linkedin": "https://www.linkedin.com/in/ayyakkkon-g/",
+      "github": "https://github.com/AYYAKKON",
+      "joinedDate": "2026-10-14"
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "inq-1",
+      "name": "Ganesh Murugan",
+      "email": "ganesh@technovate.io",
+      "phone": "+91 98112 33445",
+      "service": "AI & Cloud Architecture",
+      "budget": "$10,000 - $25,000",
+      "message": "We are seeking a reliable tech partner to build an automated recommendation engine for our SaaS platform. We loved your AuraAI case study!",
+      "status": "New",
+      "createdAt": "2026-10-12T14:30:00Z"
+    },
+    {
+      "id": "inq-2",
+      "name": "Meera Venkatesh",
+      "email": "meera@healthplus.org",
+      "phone": "+91 98223 44556",
+      "service": "Mobile App Development",
+      "budget": "$5,000 - $10,000",
+      "message": "Looking to launch an on-demand telemedicine mobile application with appointment booking and secure video calls.",
+      "status": "In Review",
+      "createdAt": "2026-10-13T09:15:00Z"
+    }
+  ]
+}

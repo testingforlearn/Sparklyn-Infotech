@@ -1,0 +1,41 @@
+[build]
+  publish = "public"
+  command = "npm run build"
+
+# Admin Dashboard Routing
+[[redirects]]
+  from = "/admin"
+  to = "/admin.html"
+  status = 200
+
+# Company Profile & PDF Routing
+[[redirects]]
+  from = "/company-profile"
+  to = "/company-profile.html"
+  status = 200
+
+[[redirects]]
+  from = "/profile"
+  to = "/company-profile.html"
+  status = 200
+
+# Static API Rewrites (Serves live portfolio data on Netlify)
+[[redirects]]
+  from = "/api/projects"
+  to = "/data/db.json"
+  status = 200
+
+[[redirects]]
+  from = "/api/company"
+  to = "/data/db.json"
+  status = 200
+
+[[redirects]]
+  from = "/api/team"
+  to = "/data/db.json"
+  status = 200
+
+[[redirects]]
+  from = "/api/stats"
+  to = "/data/db.json"
+  status = 200

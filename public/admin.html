@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sparklyn Infotech | Admin Management Portal</title>
+  <link rel="icon" type="image/png" href="/assets/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <!-- ==================== 1. LOGIN SCREEN ==================== -->
+  <div id="login-section" class="login-wrapper">
+    <div class="login-card">
+      <div class="login-brand">
+        <img src="/assets/logo.png" alt="Sparklyn Infotech Logo">
+        <h2>Admin Management Portal</h2>
+        <p>Sign in to manage company projects, users, and profile</p>
+      </div>
+
+      <div class="demo-credentials-box">
+        <div class="title"><i class="fas fa-key"></i> Default Admin Credentials:</div>
+        <div style="display:flex; justify-content:space-between; margin-top:4px;">
+          <span>Email: <code>admin@sparklyn.com</code></span>
+        </div>
+        <div style="margin-top:2px;">
+          <span>Password: <code>sparklyn@2026</code> <small style="color:var(--text-dim);">(or admin123)</small></span>
+        </div>
+        <button type="button" id="btn-quick-fill" onclick="fillDemoCredentials()" style="margin-top:8px; width:100%; padding:6px; background:rgba(255,140,0,0.2); border:1px solid rgba(255,140,0,0.4); border-radius:4px; color:#ffaa33; font-size:0.8rem; cursor:pointer; font-weight:600;">
+          Auto-Fill Credentials & Sign In
+        </button>
+      </div>
+
+      <div id="login-error" style="display:none; padding:10px; background:rgba(239,68,68,0.15); border:1px solid #ef4444; border-radius:6px; color:#fca5a5; font-size:0.85rem; margin-bottom:16px;"></div>
+
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Admin Email</label>
+          <input type="email" id="login-email" class="form-control" placeholder="admin@sparklyn.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%; padding:13px; margin-top:10px;">
+          <i class="fas fa-sign-in-alt"></i>
+          <span>Sign In to Dashboard</span>
+        </button>
+      </form>
+
+      <div style="text-align:center; margin-top:20px;">
+        <a href="/" style="color:var(--text-secondary); text-decoration:none; font-size:0.88rem; display:inline-flex; align-items:center; gap:6px;">
+          <i class="fas fa-arrow-left"></i> Return to Public Website
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. ADMIN AUTHENTICATED LAYOUT ==================== -->
+  <div id="admin-layout" class="admin-layout" style="display:none;">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="/assets/logo.png" alt="Sparklyn Logo">
+        <div>
+          <div class="title">Sparklyn</div>
+          <span class="badge">ADMIN PORTAL</span>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li>
+          <button data-tab="dashboard" class="active">
+            <i class="fas fa-chart-pie"></i>
+            <span>Dashboard</span>
+          </button>
+        </li>
+        <li>
+          <button data-tab="projects">
+            <i class="fas fa-layer-group"></i>
+            <span>Projects</span>
+          </button>
+        </li>
+        <li>
+          <button data-tab="team">
+            <i class="fas fa-users-cog"></i>
+            <span>Company Users</span>
+          </button>
+        </li>
+        <li>
+          <button data-tab="inquiries">
+            <i class="fas fa-inbox"></i>
+            <span>Inquiries / Leads</span>
+          </button>
+        </li>
+        <li>
+          <button data-tab="settings">
+            <i class="fas fa-sliders-h"></i>
+            <span>Company Profile</span>
+          </button>
+        </li>
+        <li style="margin-top:20px; border-top: 1px solid rgba(255,255,255,0.06); padding-top:12px;">
+          <a href="/" target="_blank">
+            <i class="fas fa-external-link-alt" style="color:var(--spark-amber);"></i>
+            <span>View Live Site</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-preview">
+          <div class="user-avatar-sm">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <div class="user-info-sm">
+            <div class="user-name admin-display-name">Admin</div>
+            <div class="user-role admin-display-email">admin@sparklyn.com</div>
+          </div>
+        </div>
+        <button id="btn-logout" style="width:100%; padding:9px; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:6px; color:#fca5a5; font-size:0.85rem; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+          <i class="fas fa-power-off"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="admin-topbar-title">
+          <h1 id="page-heading">Administration Console</h1>
+        </div>
+        <div class="admin-topbar-actions">
+          <a href="/" target="_blank" class="btn btn-outline" style="padding:7px 16px; font-size:0.85rem;">
+            <i class="fas fa-globe"></i> View Website
+          </a>
+          <button onclick="openAddProjectModal()" class="btn btn-primary" style="padding:8px 18px; font-size:0.85rem;">
+            <i class="fas fa-plus"></i> New Project
+          </button>
+          <button onclick="openAddTeamModal()" class="btn btn-admin" style="padding:8px 18px; font-size:0.85rem;">
+            <i class="fas fa-user-plus"></i> New User / Staff
+          </button>
+        </div>
+      </header>
+
+      <!-- Body / Tab Views -->
+      <div class="admin-body">
+
+        <!-- ==================== TAB 1: DASHBOARD ==================== -->
+        <div id="tab-dashboard" class="admin-tab-view">
+          <!-- Metric Cards -->
+          <div class="stats-cards-grid">
+            <div class="stat-card">
+              <div class="stat-icon orange"><i class="fas fa-folder-open"></i></div>
+              <div class="stat-details">
+                <div class="value" id="stat-total-projects">0</div>
+                <div class="label">Total Projects</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon blue"><i class="fas fa-user-friends"></i></div>
+              <div class="stat-details">
+                <div class="value" id="stat-total-team">0</div>
+                <div class="label">Company Users / Team</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon green"><i class="fas fa-envelope-open-text"></i></div>
+              <div class="stat-details">
+                <div class="value" id="stat-total-inquiries">0</div>
+                <div class="label">Client Inquiries</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon purple"><i class="fas fa-star"></i></div>
+              <div class="stat-details">
+                <div class="value" id="stat-featured-projects">0</div>
+                <div class="label">Featured Portfolios</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Projects Panel -->
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title"><i class="fas fa-briefcase" style="color:var(--spark-amber); margin-right:8px;"></i> Recent Projects</div>
+              <button onclick="switchTab('projects')" class="btn-icon" style="width:auto; padding:6px 14px; font-size:0.82rem;">View All &rarr;</button>
+            </div>
+            <div class="data-table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Project</th>
+                    <th>Category</th>
+                    <th>Featured</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-projects-table">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Recent Inquiries Panel -->
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title"><i class="fas fa-inbox" style="color:#10b981; margin-right:8px;"></i> Recent Client Inquiries</div>
+              <button onclick="switchTab('inquiries')" class="btn-icon" style="width:auto; padding:6px 14px; font-size:0.82rem;">View All &rarr;</button>
+            </div>
+            <div class="data-table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Sender</th>
+                    <th>Service</th>
+                    <th>Budget</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-inquiries-table">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 2: PROJECTS MANAGEMENT ==================== -->
+        <div id="tab-projects" class="admin-tab-view" style="display:none;">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Company Projects Portfolio</h3>
+                <p style="color:var(--text-sub); font-size:0.88rem; margin-top:4px;">Add, edit, or remove showcase projects. All changes display in real-time on the main website.</p>
+              </div>
+              <div class="panel-actions">
+                <button onclick="openAddProjectModal()" class="btn btn-primary">
+                  <i class="fas fa-plus"></i> Add New Project
+                </button>
+              </div>
+            </div>
+
+            <div class="data-table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Project Details</th>
+                    <th>Category</th>
+                    <th>Client</th>
+                    <th>Featured</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="projects-table-body">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 3: TEAM / USERS MANAGEMENT ==================== -->
+        <div id="tab-team" class="admin-tab-view" style="display:none;">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Company Team & Staff Directory</h3>
+                <p style="color:var(--text-sub); font-size:0.88rem; margin-top:4px;">Manage company employees, leadership profiles, departments, and roles shown on the website.</p>
+              </div>
+              <div class="panel-actions">
+                <button onclick="openAddTeamModal()" class="btn btn-primary">
+                  <i class="fas fa-user-plus"></i> Add Team Member
+                </button>
+              </div>
+            </div>
+
+            <div class="data-table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Member Details</th>
+                    <th>Role / Designation</th>
+                    <th>Department</th>
+                    <th>Phone</th>
+                    <th>Joined</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="team-table-body">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 4: INQUIRIES INBOX ==================== -->
+        <div id="tab-inquiries" class="admin-tab-view" style="display:none;">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Client Leads & Contact Inquiries</h3>
+                <p style="color:var(--text-sub); font-size:0.88rem; margin-top:4px;">Inbound inquiries sent through the public website contact form.</p>
+              </div>
+            </div>
+
+            <div class="data-table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Sender Name</th>
+                    <th>Contact Details</th>
+                    <th>Service Needed</th>
+                    <th>Budget</th>
+                    <th>Message Details</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="inquiries-table-body">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 5: COMPANY PROFILE SETTINGS ==================== -->
+        <div id="tab-settings" class="admin-tab-view" style="display:none;">
+          <div class="panel" style="max-width: 900px; margin:0 auto;">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Company Profile & Branding Settings</h3>
+                <p style="color:var(--text-sub); font-size:0.88rem; margin-top:4px;">Update Sparklyn Infotech profile data, contact addresses, and live headline stats.</p>
+              </div>
+            </div>
+
+            <form id="company-settings-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="comp-name">Company Legal Name</label>
+                  <input type="text" id="comp-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="comp-tagline">Brand Slogan / Tagline</label>
+                  <input type="text" id="comp-tagline" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="comp-email">Official Support Email</label>
+                  <input type="email" id="comp-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="comp-phone">Official Contact Phone</label>
+                  <input type="text" id="comp-phone" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="comp-address">Office Headquarters Address</label>
+                <input type="text" id="comp-address" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="comp-about">About Us Narrative</label>
+                <textarea id="comp-about" class="form-control" rows="3" required></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="comp-vision">Company Vision</label>
+                  <textarea id="comp-vision" class="form-control" rows="2" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="comp-mission">Company Mission</label>
+                  <textarea id="comp-mission" class="form-control" rows="2" required></textarea>
+                </div>
+              </div>
+
+              <h4 style="color:#ffaa33; font-size:1.05rem; margin:24px 0 14px;">Hero Statistics Numbers</h4>
+              <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:16px;">
+                <div class="form-group">
+                  <label class="form-label" for="comp-stat-proj">Projects Stat</label>
+                  <input type="text" id="comp-stat-proj" class="form-control" placeholder="150+">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="comp-stat-clients">Clients Stat</label>
+                  <input type="text" id="comp-stat-clients" class="form-control" placeholder="85+">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="comp-stat-experts">Experts Stat</label>
+                  <input type="text" id="comp-stat-experts" class="form-control" placeholder="40+">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="comp-stat-satisfaction">Satisfaction Stat</label>
+                  <input type="text" id="comp-stat-satisfaction" class="form-control" placeholder="99.2%">
+                </div>
+              </div>
+
+              <div style="margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); text-align:right;">
+                <button type="submit" class="btn btn-primary" style="padding:12px 30px;">
+                  <i class="fas fa-save"></i> Save All Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ==================== 3. MODAL: ADD / EDIT PROJECT ==================== -->
+  <div class="admin-modal-overlay" id="project-modal">
+    <div class="admin-modal-dialog">
+      <div class="admin-modal-header">
+        <h3 id="project-modal-title">Add New Project</h3>
+        <button class="admin-modal-close btn-icon">&times;</button>
+      </div>
+      <form id="project-form">
+        <div class="admin-modal-body">
+          <input type="hidden" id="project-id">
+
+          <div class="form-group">
+            <label class="form-label" for="project-title">Project Title *</label>
+            <input type="text" id="project-title" class="form-control" placeholder="e.g. AuraAI - Enterprise Analytics" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="project-category">Category *</label>
+              <select id="project-category" class="form-control" required>
+                <option value="Web Applications">Web Applications</option>
+                <option value="Mobile App">Mobile App</option>
+                <option value="Mobile App & AI">Mobile App & AI</option>
+                <option value="AI & Cloud">AI & Cloud</option>
+                <option value="UI/UX & Product">UI/UX & Product</option>
+                <option value="Enterprise ERP">Enterprise ERP</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="project-client">Client Name</label>
+              <input type="text" id="project-client" class="form-control" placeholder="e.g. Apex Global Logistics">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="project-summary">Short Summary (Shown on Card) *</label>
+            <input type="text" id="project-summary" class="form-control" placeholder="One sentence pitch..." required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="project-description">Full Project Description (Case Study)</label>
+            <textarea id="project-description" class="form-control" rows="3" placeholder="Explain the problem, technical architecture, and impact..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="project-tech">Tech Stack (comma separated)</label>
+            <input type="text" id="project-tech" class="form-control" placeholder="React, Node.js, Python, AWS, Docker">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Project Image / Screenshot</label>
+            <div style="display:flex; gap:10px; margin-bottom:8px;">
+              <input type="text" id="project-image-url" class="form-control" placeholder="Image URL (https://...) or choose file below">
+            </div>
+            <label class="upload-dropzone" for="project-file-input">
+              <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <div style="font-size:0.9rem; font-weight:600; color:#fff;">Click to upload image from computer</div>
+              <div style="font-size:0.75rem; color:var(--text-dim); margin-top:4px;">Supports PNG, JPG, WebP up to 10MB</div>
+              <input type="file" id="project-file-input" accept="image/*" style="display:none;">
+            </label>
+            <div class="preview-thumb-box">
+              <img id="project-preview-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Preview">
+              <span style="font-size:0.8rem; color:var(--text-dim);">Live preview of project cover</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="project-live-url">Live Demo / Product URL</label>
+              <input type="url" id="project-live-url" class="form-control" placeholder="https://example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="project-status">Status</label>
+              <select id="project-status" class="form-control">
+                <option value="Completed">Completed</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Beta Live">Beta Live</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:10px; margin-top:8px;">
+            <input type="checkbox" id="project-featured" style="width:18px; height:18px; accent-color:var(--spark-orange);">
+            <label for="project-featured" style="color:#fff; font-size:0.9rem; font-weight:600; cursor:pointer;">
+              Highlight as Featured Project on Homepage
+            </label>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-outline admin-modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== 4. MODAL: ADD / EDIT TEAM MEMBER ==================== -->
+  <div class="admin-modal-overlay" id="team-modal">
+    <div class="admin-modal-dialog">
+      <div class="admin-modal-header">
+        <h3 id="team-modal-title">Add Team Member / Company User</h3>
+        <button class="admin-modal-close btn-icon">&times;</button>
+      </div>
+      <form id="team-form">
+        <div class="admin-modal-body">
+          <input type="hidden" id="team-id">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="team-name">Full Name *</label>
+              <input type="text" id="team-name" class="form-control" placeholder="e.g. Priya Sundaram" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="team-role">Role / Job Title *</label>
+              <input type="text" id="team-role" class="form-control" placeholder="e.g. Chief Technology Officer" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="team-department">Department</label>
+              <select id="team-department" class="form-control">
+                <option value="Executive Leadership">Executive Leadership</option>
+                <option value="Software Engineering">Software Engineering</option>
+                <option value="Engineering & AI">Engineering & AI</option>
+                <option value="Mobile Engineering">Mobile Engineering</option>
+                <option value="Design & Innovation">Design & Innovation</option>
+                <option value="DevOps & Infrastructure">DevOps & Infrastructure</option>
+                <option value="Quality Assurance">Quality Assurance</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="team-email">Company Email</label>
+              <input type="email" id="team-email" class="form-control" placeholder="priya@sparklyninfotech.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="team-phone">Phone / WhatsApp</label>
+            <input type="text" id="team-phone" class="form-control" placeholder="+91 98401 00000">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="team-bio">Professional Bio</label>
+            <textarea id="team-bio" class="form-control" rows="2" placeholder="Brief background, achievements, and technical expertise..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="team-skills">Core Skills (comma separated)</label>
+            <input type="text" id="team-skills" class="form-control" placeholder="Python, System Architecture, Machine Learning">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Profile Avatar / Photo</label>
+            <input type="text" id="team-avatar-url" class="form-control" placeholder="Avatar URL (https://...) or choose file below" style="margin-bottom:8px;">
+            <label class="upload-dropzone" for="team-file-input">
+              <div class="icon"><i class="fas fa-camera"></i></div>
+              <div style="font-size:0.9rem; font-weight:600; color:#fff;">Click to upload member photo from computer</div>
+              <input type="file" id="team-file-input" accept="image/*" style="display:none;">
+            </label>
+            <div class="preview-thumb-box">
+              <img id="team-preview-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Preview" style="border-radius:50%;">
+              <span style="font-size:0.8rem; color:var(--text-dim);">Avatar preview</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="team-linkedin">LinkedIn Profile URL</label>
+              <input type="url" id="team-linkedin" class="form-control" placeholder="https://linkedin.com/in/username">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="team-github">GitHub / Portfolio URL</label>
+              <input type="url" id="team-github" class="form-control" placeholder="https://github.com/username">
+            </div>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-outline admin-modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-user-check"></i> Save Team Member</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function fillDemoCredentials() {
+      document.getElementById('login-email').value = 'admin@sparklyn.com';
+      document.getElementById('login-password').value = 'sparklyn@2026';
+      document.getElementById('admin-login-form').dispatchEvent(new Event('submit'));
+    }
+  </script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

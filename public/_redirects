@@ -1,0 +1,7 @@
+/admin            /admin.html           200
+/company-profile  /company-profile.html 200
+/profile          /company-profile.html 200
+/api/projects     /data/db.json         200
+/api/company      /data/db.json         200
+/api/team         /data/db.json         200
+/api/stats        /data/db.json         200
