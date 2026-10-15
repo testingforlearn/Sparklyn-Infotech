@@ -92,6 +92,20 @@ function initParticleCanvas() {
 
 /* ==================== 2. LOAD COMPANY PROFILE DATA ==================== */
 async function loadCompanyData() {
+  // 1. Try Firebase Firestore first
+  if (typeof firestoreDb !== 'undefined' && firestoreDb) {
+    try {
+      const snap = await firestoreDb.collection('company').doc('profile').get();
+      if (snap.exists) {
+        applyCompanyData(snap.data());
+        return;
+      }
+    } catch (e) {
+      console.warn('Firestore company load warning, trying fallback:', e.message);
+    }
+  }
+
+  // 2. Fallback to /api/company or /data/db.json
   try {
     let res = await fetch('/api/company');
     if (!res.ok) {
@@ -100,63 +114,64 @@ async function loadCompanyData() {
     const data = await res.json();
     const comp = data.company || (data.success ? data.company : null);
     if (!comp) return;
-
-    // Update Text where marked
-    document.querySelectorAll('.company-name').forEach(el => el.textContent = comp.name || 'Sparklyn Infotech');
-    document.querySelectorAll('.company-tagline').forEach(el => el.textContent = comp.tagline || 'From First Spark to Future Tech');
-    
-    if (comp.about) {
-      const aboutEl = document.getElementById('company-about-text');
-      if (aboutEl) aboutEl.textContent = comp.about;
-    }
-
-    if (comp.vision) {
-      const visionEl = document.getElementById('company-vision-text');
-      if (visionEl) visionEl.textContent = comp.vision;
-    }
-
-    if (comp.mission) {
-      const missionEl = document.getElementById('company-mission-text');
-      if (missionEl) missionEl.textContent = comp.mission;
-    }
-
-    // Contact info
-    if (comp.email) {
-      document.querySelectorAll('.company-email').forEach(el => {
-        el.textContent = comp.email;
-        if (el.tagName === 'A') el.href = `mailto:${comp.email}`;
-      });
-    }
-
-    if (comp.phone) {
-      document.querySelectorAll('.company-phone').forEach(el => {
-        el.textContent = comp.phone;
-        if (el.tagName === 'A') el.href = `tel:${comp.phone.replace(/[^0-9+]/g, '')}`;
-      });
-    }
-
-    if (comp.address) {
-      document.querySelectorAll('.company-address').forEach(el => el.textContent = comp.address);
-    }
-
-    // Stats
-    if (comp.stats) {
-      if (document.getElementById('stat-projects')) document.getElementById('stat-projects').textContent = comp.stats.projects || '150+';
-      if (document.getElementById('stat-clients')) document.getElementById('stat-clients').textContent = comp.stats.clients || '85+';
-      if (document.getElementById('stat-experts')) document.getElementById('stat-experts').textContent = comp.stats.experts || '40+';
-      if (document.getElementById('stat-satisfaction')) document.getElementById('stat-satisfaction').textContent = comp.stats.satisfaction || '99.2%';
-    }
+    applyCompanyData(comp);
   } catch (err) {
     try {
       const fallbackRes = await fetch('/data/db.json');
       const fallbackData = await fallbackRes.json();
       if (fallbackData.company) {
-        const comp = fallbackData.company;
-        document.querySelectorAll('.company-name').forEach(el => el.textContent = comp.name || 'Sparklyn Infotech');
-        document.querySelectorAll('.company-tagline').forEach(el => el.textContent = comp.tagline || 'From First Spark to Future Tech');
+        applyCompanyData(fallbackData.company);
       }
     } catch(e) {}
     console.error('Error fetching company info:', err);
+  }
+}
+
+function applyCompanyData(comp) {
+  if (!comp) return;
+  document.querySelectorAll('.company-name').forEach(el => el.textContent = comp.name || 'Sparklyn Infotech');
+  document.querySelectorAll('.company-tagline').forEach(el => el.textContent = comp.tagline || 'From First Spark to Future Tech');
+  
+  if (comp.about) {
+    const aboutEl = document.getElementById('company-about-text');
+    if (aboutEl) aboutEl.textContent = comp.about;
+  }
+
+  if (comp.vision) {
+    const visionEl = document.getElementById('company-vision-text');
+    if (visionEl) visionEl.textContent = comp.vision;
+  }
+
+  if (comp.mission) {
+    const missionEl = document.getElementById('company-mission-text');
+    if (missionEl) missionEl.textContent = comp.mission;
+  }
+
+  // Contact info
+  if (comp.email) {
+    document.querySelectorAll('.company-email').forEach(el => {
+      el.textContent = comp.email;
+      if (el.tagName === 'A') el.href = `mailto:${comp.email}`;
+    });
+  }
+
+  if (comp.phone) {
+    document.querySelectorAll('.company-phone').forEach(el => {
+      el.textContent = comp.phone;
+      if (el.tagName === 'A') el.href = `tel:${comp.phone.replace(/[^0-9+]/g, '')}`;
+    });
+  }
+
+  if (comp.address) {
+    document.querySelectorAll('.company-address').forEach(el => el.textContent = comp.address);
+  }
+
+  // Stats
+  if (comp.stats) {
+    if (document.getElementById('stat-projects')) document.getElementById('stat-projects').textContent = comp.stats.projects || '150+';
+    if (document.getElementById('stat-clients')) document.getElementById('stat-clients').textContent = comp.stats.clients || '85+';
+    if (document.getElementById('stat-experts')) document.getElementById('stat-experts').textContent = comp.stats.experts || '40+';
+    if (document.getElementById('stat-satisfaction')) document.getElementById('stat-satisfaction').textContent = comp.stats.satisfaction || '99.2%';
   }
 }
 
@@ -172,6 +187,21 @@ async function loadProjects() {
     </div>
   `;
 
+  // 1. Try Firebase Firestore
+  if (typeof firestoreDb !== 'undefined' && firestoreDb) {
+    try {
+      const snap = await firestoreDb.collection('projects').get();
+      if (!snap.empty) {
+        allProjects = snap.docs.map(doc => doc.data());
+        renderProjects(allProjects);
+        return;
+      }
+    } catch (e) {
+      console.warn('Firestore projects load warning, trying fallback:', e.message);
+    }
+  }
+
+  // 2. Fallback to API / db.json
   try {
     let res = await fetch('/api/projects');
     if (!res.ok) {
@@ -270,6 +300,21 @@ async function loadTeam() {
     </div>
   `;
 
+  // 1. Try Firebase Firestore
+  if (typeof firestoreDb !== 'undefined' && firestoreDb) {
+    try {
+      const snap = await firestoreDb.collection('team').get();
+      if (!snap.empty) {
+        const teamList = snap.docs.map(doc => doc.data());
+        renderTeam(teamList);
+        return;
+      }
+    } catch (e) {
+      console.warn('Firestore team load warning, trying fallback:', e.message);
+    }
+  }
+
+  // 2. Fallback to API / db.json
   try {
     let res = await fetch('/api/team');
     if (!res.ok) {
@@ -453,6 +498,25 @@ function setupEventListeners() {
         message: document.getElementById('contact-message').value
       };
 
+      // 1. Try Firebase Firestore directly
+      if (typeof firestoreDb !== 'undefined' && firestoreDb) {
+        try {
+          await firestoreDb.collection('inquiries').add({
+            ...payload,
+            status: 'New',
+            createdAt: new Date().toISOString()
+          });
+          showToast('Thank you! Your message has been saved and sent to Sparklyn team.', 'success');
+          contactForm.reset();
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+          return;
+        } catch (fbErr) {
+          console.warn('Firestore write warning, trying fallback:', fbErr.message);
+        }
+      }
+
+      // 2. Fallback to /api/contact or offline storage
       try {
         const res = await fetch('/api/contact', {
           method: 'POST',
