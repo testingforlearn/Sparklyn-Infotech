@@ -1,0 +1,14 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/company-profile", "destination": "/company-profile.html" },
+    { "source": "/profile", "destination": "/company-profile.html" },
+    { "source": "/api/projects", "destination": "/data/db.json" },
+    { "source": "/api/company", "destination": "/data/db.json" },
+    { "source": "/api/team", "destination": "/data/db.json" },
+    { "source": "/api/stats", "destination": "/data/db.json" }
+  ]
+}
